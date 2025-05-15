@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/usr/local/bin/nfsmount 192.168.1.214 /srv/nfs/chess &

@@ -1,0 +1,6 @@
+#!/bin/sh
+wget 'https://discord.com/api/download/ptb?platform=linux&format=tar.gz' -O /tmp/discord.tar.gz
+tar -xpvf /tmp/discord.tar.gz -C /tmp
+rm -r /opt/discord-ptb
+mv /tmp/DiscordPTB /opt/discord-ptb
+rm /tmp/discord.tar.gz

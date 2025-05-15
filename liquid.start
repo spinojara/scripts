@@ -1,0 +1,3 @@
+#!/bin/sh
+
+liquidctl set pump speed 85
