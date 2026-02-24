@@ -1,0 +1,46 @@
+#!/bin/bash
+
+logger "Running 'emaint -a sync'"
+emaint -a sync
+status=$?
+
+if [ $status -ne 0 ]; then
+	logger "'emaint -a sync' returned $status"
+	exit $status
+else
+	logger "'emaint -a sync' ran successfully"
+fi
+
+logger "Running 'emerge -u sys-apps/portage'"
+# First update portage in case we need to. This is recommended
+emerge -u sys-apps/portage
+status=$?
+
+if [ $status -ne 0 ]; then
+	logger "'emerge -u sys-apps/portage' returned $status"
+	exit $status
+else
+	logger "'emerge -u sys-apps/portage' ran successfully"
+fi
+
+logger "Running 'emerge -uDUq --with-bdeps=y @world'"
+emerge -uDUq --with-bdeps=y @world
+status=$?
+
+if [ $status -ne 0 ]; then
+	logger "'emerge -uDUq --with-bdeps=y @world' returned $status"
+	exit $status
+else
+	logger "'emerge -uDUq --with-bdeps=y @world' ran successfully"
+fi
+
+logger "Running 'emerge -c --with-bdeps=y'"
+emerge -c --with-bdeps=y
+status=$?
+
+if [ $status -ne 0 ]; then
+	logger "'emerge -ac --with-bdeps=y' returned $status"
+	exit $status
+else
+	logger "'emerge -ac --with-bdeps=y' ran successfully"
+fi
